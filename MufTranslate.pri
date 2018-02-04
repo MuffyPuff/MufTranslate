@@ -1,3 +1,3 @@
 OTHER_FILES += \
-            ../muftranslate/src/muftranslate.cpp \
-            ../muftranslate/src/muftranslate.h
+            ../MufTranslate/src/muftranslate.cpp \
+            ../MufTranslate/src/muftranslate.h
