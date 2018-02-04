@@ -15,8 +15,10 @@ QWaitCondition MufTranslate::_condnewinfoavail;
 bool MufTranslate::_hasnewinfo = false;
 bool MufTranslate::_abort = false;
 
-QString MufTranslate::languageDir = QDir::homePath() +
-                                    "/.strah_calc/lang/en-GB.json";
+QString MufTranslate::languageDir = "./lang/en-GB.json";
+
+//QString MufTranslate::languageDir = QDir::homePath() +
+//                                    "/.strah_calc/lang/en-GB.json";
 
 MufTranslate::MufTranslate(const QString& lang, QObject* parent)
         : QObject(parent)
