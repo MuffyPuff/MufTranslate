@@ -15,7 +15,9 @@ QWaitCondition MufTranslate::_condnewinfoavail;
 bool MufTranslate::_hasnewinfo = false;
 bool MufTranslate::_abort = false;
 
-QString MufTranslate::languageDir = "./lang/en-GB.json";
+QString MufTranslate::languageDir = QDir::cleanPath(
+                QDir::current().absolutePath() +
+                "/../StrahCalc/lang/");
 
 //QString MufTranslate::languageDir = QDir::homePath() +
 //                                    "/.strah_calc/lang/en-GB.json";
@@ -24,8 +26,10 @@ MufTranslate::MufTranslate(const QString& lang, QObject* parent)
         : QObject(parent)
 //        : _language(lang), QObject(parent), _hasnewinfo(false), _abort(false)
 {
-	languageDir = QDir::homePath() +
-	              "/.strah_calc/lang/";
+//	languageDir = QDir::homePath() +
+//	              "/.strah_calc/lang/";
+	languageDir = QDir::cleanPath(QDir::current().absolutePath() +
+	                              "/../StrahCalc/lang/");
 	changeLanguage(lang);
 	loadLangFile();
 }
@@ -63,7 +67,7 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 //			qDebug() << "language: " << language;
 //			qDebug() << (!lang.isEmpty());
 //			qDebug() << (lang.compare(language) != 0);
-			QFile lingo(languageDir + lang + ".json");
+			QFile lingo(languageDir + "/" + lang + ".json");
 			if (!lingo.open(QIODevice::ReadOnly)) {
 				qDebug() << "language file not found";
 				return "Language file not found";
@@ -109,7 +113,7 @@ MufTranslate::loadLangFile(const QString& lang)
 	if (!lang.isEmpty()  and lang.compare(language) != 0) {
 		language = lang;
 	}
-	QFile lingo(languageDir + language + ".json");
+	QFile lingo(languageDir + "/" + language + ".json");
 //	qDebug() << "set file";
 //	QDir dir(languageDir);
 //	qDebug() << dir.absolutePath();
