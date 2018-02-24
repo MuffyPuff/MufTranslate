@@ -3,12 +3,12 @@
 
 #include <QObject>
 //#include <QJsonObject>
-#include <QJsonArray>
-#include <QDir>
 #include <QWaitCondition>
 #include <QMutex>
 #include <QMutexLocker>
 
+#include <QJsonArray>
+#include <QDir>
 #include <QStandardPaths>
 
 class MufTranslate : public QObject

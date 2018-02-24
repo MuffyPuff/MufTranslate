@@ -31,7 +31,7 @@ MufTranslate::MufTranslate(const QString& lang, QObject* parent)
 	languageDir = QDir::cleanPath(QDir::current().absolutePath() +
 	                              "/../StrahCalc/lang/");
 	changeLanguage(lang);
-	loadLangFile();
+//	loadLangFile(); // should not be needed; changeLanguage calls load
 }
 
 MufTranslate::~MufTranslate()
@@ -62,7 +62,7 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 		_mutex.unlock();
 
 		if (!lang.isEmpty() and lang.compare(language) != 0) {
-			qDebug() << "alt language";
+//			qDebug() << "alt language";
 //			qDebug() << "lang: " << lang;
 //			qDebug() << "language: " << language;
 //			qDebug() << (!lang.isEmpty());
@@ -99,7 +99,11 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 			}
 		}
 		qDebug() << "language entry not found";
-		return "Entry not found";
+		if (lang == "en-GB") {
+			return code;
+		} else {
+			return operator()(code, "en-GB");
+		}
 	}
 }
 
@@ -130,7 +134,7 @@ MufTranslate::loadLangFile(const QString& lang)
 	_languageFile = doc.array();
 	_hasnewinfo = true;
 	_condnewinfoavail.wakeOne();
-	qDebug() << "language changed";
+//	qDebug() << "language changed";
 	return true;
 }
 
