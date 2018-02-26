@@ -92,7 +92,7 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 
 		QVariantList vl = langFile.toVariantList();
 		QVector<QVariant> vv = vl.toVector();
-		foreach (QVariant e, vv) {
+		for (auto& e : vv) {
 			QJsonObject entry = e.toJsonObject();
 			if (entry.value("id").toString() == code) {
 				return entry.value("translation").toString();
