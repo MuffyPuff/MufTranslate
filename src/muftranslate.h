@@ -10,6 +10,8 @@
 #include <QJsonArray>
 #include <QDir>
 #include <QStandardPaths>
+#include <QMap>
+#include <QString>
 
 class MufTranslate : public QObject
 {
@@ -19,14 +21,14 @@ public:
 	~MufTranslate();
 
 	QString         operator()(const QString& code, const QString& lang = "");
-	static bool     changeLanguage(const QString& lang);
 
 private:
 	static bool     loadLangFile(const QString& lang = "");
-
 signals:
+	void            languageChanged(QString);
 
 public slots:
+	bool     changeLanguage(const QString& lang);
 
 private:
 	static QString  _language;
@@ -38,6 +40,9 @@ private:
 	static bool     _hasnewinfo;
 	static bool     _abort;
 	static QString  languageDir;
+
+public:
+	static QMap<QString, QString> _languageList;
 };
 
 #endif // MUFTRANSLATE_H

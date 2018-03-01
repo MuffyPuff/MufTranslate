@@ -8,6 +8,7 @@
 
 QString MufTranslate::_language = "en-GB";
 QJsonArray MufTranslate::_languageFile = QJsonArray();
+QMap<QString, QString> MufTranslate::_languageList;
 
 QMutex MufTranslate::_mutex;
 QWaitCondition MufTranslate::_condnewinfoavail;
@@ -31,6 +32,7 @@ MufTranslate::MufTranslate(const QString& lang, QObject* parent)
 	languageDir = QDir::cleanPath(QDir::current().absolutePath() +
 	                              "/../StrahCalc/lang/");
 	changeLanguage(lang);
+	_languageList[lang] = operator()("language_name");
 //	loadLangFile(); // should not be needed; changeLanguage calls load
 }
 
@@ -76,6 +78,7 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 			lingo.close();
 			QJsonDocument doc = QJsonDocument::fromJson(langData);
 			langFile = doc.array();
+			_languageList[lang] = operator()("language_name");
 		}
 
 		_mutex.lock();
@@ -156,6 +159,7 @@ MufTranslate::changeLanguage(const QString& lang)
 //	qDebug() << "called loadLangFile";
 	_mutex.lock();
 	_condnewinfoavail.wakeOne();
+	emit languageChanged(_language);
 	_mutex.unlock();
 	return true;
 }
