@@ -1,4 +1,4 @@
 OTHER_FILES += \
-            ../MufTranslate/src/muftranslate.cpp \
-            ../MufTranslate/src/muftranslate.h \
-            ../MufTranslate/MufTranslate.pro
+            ./lib/MufTranslate/src/muftranslate.cpp \
+            ./lib/MufTranslate/src/muftranslate.h \
+            ./lib/MufTranslate/MufTranslate.pro
