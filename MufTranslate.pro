@@ -6,7 +6,7 @@
 
 QT       += core gui widgets
 
-DESTDIR = ../../StrahCalc/lib
+DESTDIR = ../../bin
 
 TARGET = MufTranslate
 TEMPLATE = lib
