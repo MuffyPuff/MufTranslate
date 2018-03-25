@@ -15,7 +15,7 @@ SOURCES += \
         src/muftranslate.cpp
 
 HEADERS += \
-        src/muftranslate.h
+        include/muftranslate.h
 
 unix:!symbian {
     maemo5 {
