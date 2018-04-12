@@ -17,6 +17,8 @@ SOURCES += \
 HEADERS += \
         include/muftranslate.h
 
+INCLUDEPATH += $$PWD/include
+
 unix:!symbian {
     maemo5 {
         target.path = /opt/usr/lib

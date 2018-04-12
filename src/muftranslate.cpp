@@ -33,6 +33,7 @@ MufTranslate::MufTranslate(const QString& lang, QObject* parent)
 	                              "/../StrahCalc/lang/");
 	changeLanguage(lang);
 	_languageList[lang] = operator()("language_name");
+//	qDebug() << _languageList;
 //	loadLangFile(); // should not be needed; changeLanguage calls load
 }
 
@@ -71,14 +72,14 @@ MufTranslate::operator()(const QString& code, const QString& lang)
 //			qDebug() << (lang.compare(language) != 0);
 			QFile lingo(languageDir + "/" + lang + ".json");
 			if (!lingo.open(QIODevice::ReadOnly)) {
-				qDebug() << "language file not found";
+				qDebug() << "language file not found: " +
+				         lingo.fileName();
 				return "Language file not found";
 			}
 			QByteArray langData = lingo.readAll();
 			lingo.close();
 			QJsonDocument doc = QJsonDocument::fromJson(langData);
 			langFile = doc.array();
-			_languageList[lang] = operator()("language_name");
 		}
 
 		_mutex.lock();
@@ -127,7 +128,8 @@ MufTranslate::loadLangFile(const QString& lang)
 //	qDebug() << languageDir;
 //	qDebug() << dir.homePath();
 	if (!lingo.open(QIODevice::ReadOnly)) {
-		qDebug() << "language file not found";
+		qDebug() << "language file not found: " +
+		         lingo.fileName();
 		return false;
 	}
 //	qDebug() << "language file found";
