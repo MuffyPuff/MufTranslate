@@ -30,7 +30,7 @@ MufTranslate::MufTranslate(const QString& lang, QObject* parent)
 //	languageDir = QDir::homePath() +
 //	              "/.strah_calc/lang/";
 	languageDir = QDir::cleanPath(QDir::current().absolutePath() +
-	                              "/../StrahCalc/lang/");
+	                              "/lang/");
 	changeLanguage(lang);
 	_languageList[lang] = operator()("language_name");
 //	qDebug() << _languageList;
